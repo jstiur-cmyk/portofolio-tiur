@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Backend Development | Tiur Juliana Sitorus</title>
+  <meta name="description" content="An Information Technology student interested in UI/UX Design, Systems Analysis, Data Analysis, Web Development, and Quality Assurance. Currently seeking an internship opportunity to gain hands-on experience in a professional setting.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@500;600;700&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a class="lewati" href="#main">Skip to content</a>
+
+<nav class="navbar" aria-label="Main menu">
+  <a class="merek" href="index.html#home">
+    Tiur Sitorus
+  </a>
+
+  <button class="menu-tombol" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="menu-utama">
+    <i class="fa-solid fa-bars"></i>
+  </button>
+
+  <div class="menu" id="menu-utama">
+    <a href="index.html#about" data-bagian="about"><span>01.</span>About</a>
+    <a href="index.html#analysis" data-bagian="analysis"><span>02.</span>Analysis</a>
+    <a href="index.html#qa" data-bagian="qa"><span>03.</span>QA Work</a>
+    <a href="index.html#education" data-bagian="education"><span>04.</span>Education</a>
+    <a href="index.html#experience" data-bagian="experience"><span>05.</span>Experience</a>
+    <a href="index.html#projects" data-bagian="projects"><span>06.</span>Projects</a>
+    <a href="index.html#skills" data-bagian="skills"><span>07.</span>Skills</a>
+    <a href="index.html#certificates" data-bagian="certificates"><span>08.</span>Certificates</a>
+    <a href="index.html#contact" data-bagian="contact" class="menu-kontak">Contact</a>
+  </div>
+</nav>
+<header class="kepala-halaman">
+  <div class="wadah">
+    <h1>Backend Development</h1>
+    <p>Level: Intermediate</p>  </div>
+</header>
+
+<section class="bagian">
+  <div class="wadah detail">
+    <a class="kembali" href="index.html#skills"><i class="fa-solid fa-arrow-left"></i> Back to portfolio</a>
+
+    <div class="detail-kotak">
+      <span class="chip aksen">Web Development</span>
+
+      
+              <p class="detail-uraian">Built server-side features and database integration with Laravel, PHP, and MySQL for the UEC Laguboti Website (PA 1)</p>
+      
+      
+          </div>
+  </div>
+</section>
+
+<footer class="kaki">
+  <div class="wadah kaki-isi">
+    <p>&copy; 2026 Tiur Juliana Sitorus</p>
+    <div class="kaki-tautan">
+      <a href="mailto:tiurjulianasitorus@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>      <a href="https://wa.me/6282164765630" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>      <a href="https://github.com/jstiur-cmyk" target="_blank" rel="noopener" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>      <a href="https://www.linkedin.com/in/tiurjulianasitorus/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>    </div>
+  </div>
+</footer>
+
+<a class="ke-atas" href="#" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></a>
+
+<script>
+  const tanpaGerak = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // ===== 1. Menu di HP: buka dan tutup =====
+  const tombolMenu = document.querySelector(".menu-tombol");
+  const menu = document.querySelector(".menu");
+  tombolMenu.addEventListener("click", function () {
+    const buka = menu.classList.toggle("buka");
+    tombolMenu.setAttribute("aria-expanded", buka);
+    tombolMenu.innerHTML = buka ? '<i class="fa-solid fa-xmark"></i>' : '<i class="fa-solid fa-bars"></i>';
+  });
+  menu.querySelectorAll("a").forEach(function (a) {
+    a.addEventListener("click", function () {
+      menu.classList.remove("buka");
+      tombolMenu.setAttribute("aria-expanded", false);
+      tombolMenu.innerHTML = '<i class="fa-solid fa-bars"></i>';
+    });
+  });
+
+  // ===== 2. Menu atas menyala sesuai bagian yang sedang dilihat =====
+  const tautanMenu = document.querySelectorAll(".menu a[data-bagian]");
+  const bagian = document.querySelectorAll("main section[id]");
+  if (bagian.length) {
+    const penanda = new IntersectionObserver(function (daftar) {
+      daftar.forEach(function (d) {
+        if (d.isIntersecting) {
+          tautanMenu.forEach(function (a) {
+            a.classList.toggle("aktif", a.dataset.bagian === d.target.id);
+          });
+        }
+      });
+    }, { rootMargin: "-45% 0px -50% 0px" });
+    bagian.forEach(function (b) { penanda.observe(b); });
+  }
+
+  // ===== 3. Elemen muncul perlahan saat digulir =====
+  const target = document.querySelectorAll(
+    ".judul-bagian, .kartu, .kartu-sertifikat, .linimasa li, .fakta li, .jenis-uji, .langkah, .angka, .skill-kelompok, .tabel-wadah, .panel, .kotak-kode, .qa-kepala"
+  );
+  if (!tanpaGerak && "IntersectionObserver" in window) {
+    const pengamat = new IntersectionObserver(function (daftar) {
+      daftar.forEach(function (d) {
+        if (d.isIntersecting) {
+          d.target.classList.add("tampil");
+          pengamat.unobserve(d.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    target.forEach(function (el) {
+      const urutan = Array.prototype.indexOf.call(el.parentNode.children, el);
+      el.style.transitionDelay = (Math.min(urutan, 5) * 0.07) + "s";
+      el.classList.add("muncul");
+      pengamat.observe(el);
+    });
+  }
+
+  // ===== 4. Teks mengetik sendiri di bagian Home =====
+  const ketik = document.querySelector(".ketik");
+  if (ketik && !tanpaGerak) {
+    const kata = JSON.parse(ketik.dataset.kata);
+    let nomor = 0, huruf = kata[0].length, menghapus = true;
+    function jalan() {
+      const k = kata[nomor];
+      ketik.textContent = k.substring(0, huruf);
+      if (!menghapus && huruf < k.length) { huruf++; setTimeout(jalan, 80); }
+      else if (!menghapus) { menghapus = true; setTimeout(jalan, 1700); }
+      else if (huruf > 0) { huruf--; setTimeout(jalan, 40); }
+      else { menghapus = false; nomor = (nomor + 1) % kata.length; setTimeout(jalan, 250); }
+    }
+    setTimeout(jalan, 1700);
+  }
+
+  // ===== 5. Baris terminal muncul satu per satu seperti test yang sedang berjalan =====
+  const barisUji = document.querySelectorAll(".baris-uji");
+  if (!tanpaGerak) {
+    barisUji.forEach(function (b, i) {
+      b.classList.add("tunggu");
+      setTimeout(function () { b.classList.remove("tunggu"); }, 400 + i * 380);
+    });
+  }
+
+  // ===== 6. Bayangan menu atas dan tombol ke atas saat halaman digulir =====
+  const navbar = document.querySelector(".navbar");
+  const keAtas = document.querySelector(".ke-atas");
+  function cekGulir() {
+    navbar.classList.toggle("gulir", window.scrollY > 10);
+    keAtas.classList.toggle("muncul-tombol", window.scrollY > 600);
+  }
+  window.addEventListener("scroll", cekGulir, { passive: true });
+  cekGulir();
+</script>
+</body>
+</html>
