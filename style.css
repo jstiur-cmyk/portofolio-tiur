@@ -594,3 +594,7 @@ form input:focus, form textarea:focus { outline: none; border-color: var(--biru)
 
 /* nama polos, tanpa warna gradasi */
 .hero-nama { background: none; -webkit-background-clip: border-box; background-clip: border-box; color: var(--judul); }
+
+/* halaman detail: sembunyikan sisa gaya lama di logo dan footer */
+.merek-ikon, .merek .kursor { display: none; }
+.kaki-isi > p.mono { display: none; }
